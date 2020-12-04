@@ -14,12 +14,13 @@ def bucklingCheck(im, L, R, t1, m):
     P = 4.3 * g * m
     E = yieldstrength[im]
     A = 2 * math.pi * R * t1
-    I = math.pi * R**3 * t1
+    I = math.pi * R*R*R * t1
     Q = (p/E) * (R/t1)**2
-    k = lamda + (12/math.pi**4) * (L**4/(R**2 * t1**2)) * (1 - nu**2) * (1/lamda)  
+    lamda = math.sqrt((12/math.pi**4)*((L*L*L*L)/((R*R)*(t1*t1))*(1-nu**2)))
+    k = lamda + (12/math.pi**4) * (L*L*L*L/(R*R * t1**t1)) * (1 - nu*nu) * (1/lamda)  
 
     # column buckling
-    sigma_cr1 = (math.pi**2) * E * I / (A * L**2)
+    sigma_cr1 = (math.pi**2) * E * I / (A * L*L)
     sigma_tank = P / A
     diff_col = sigma_cr1 - sigma_tank
     
