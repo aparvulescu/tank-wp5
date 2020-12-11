@@ -6,6 +6,7 @@ import math
 
 materials = ['Ti-6Al-4V','Ti-3Al-2.5V','Al 2219-T851']
 yieldstrength = [880e6, 500e6, 352e6]
+youngsm = [113.8e9, 100e9, 73.1e9]
 g = 9.81
 nu = [0.342, 0.3, 0.33]  # for aluminium poisson's ratio
  
@@ -13,7 +14,7 @@ nu = [0.342, 0.3, 0.33]  # for aluminium poisson's ratio
 def bucklingCheck(im, L, R, t1, m):
     p = 20e5
     P = 4.3 * g * m
-    E = yieldstrength[im]
+    E = youngsm[im]
     A = 2 * math.pi * R * t1
     I = math.pi * R*R*R * t1
     Q = (p/E) * (R/t1)**2
