@@ -12,19 +12,23 @@ yieldstrength = [880e6, 500e6, 352e6]
 density = [4430, 4480, 2840]
 youngsm = [113.8e9, 100e9, 73.1e9]
 V = [0.12/2, 0.15/2]
+aR = [0.155, 0.175]
+aL = [0.59, 0.55]
+choices = ["fuel", "oxidizer"]
 fo = 2
 ok = 0
 n = 4  # number of attachemnts per tank
 
-while fo != 0 and fo != 1:
-    fo = int(input("Do you want to calculate dimensions for fuel (0) or oxizidizer (1)?: "))
-    if fo != 0 and fo != 1:
-        print("Your input is wrong! Only accepted values are 0 (fuel) or 1 (oxidizer). Try again.")
+#while fo != 0 and fo != 1:
+#    fo = int(input("Do you want to calculate dimensions for fuel (0) or oxizidizer (1)?: "))
+#    if fo != 0 and fo != 1:
+#        print("Your input is wrong! Only accepted values are 0 (fuel) or 1 (oxidizer). Try again.")
     
-maxR = (3 * V[fo] / 4 / math.pi)**(1/3)
+#maxR = (3 * V[fo] / 4 / math.pi)**(1/3)
 
-for R in np.arange(0.01, maxR, 1e-3):
-    L = 1 / (math.pi * R * R) * (V[fo] - 4/3*math.pi*R*R*R)
+for fo in range(2):
+    R = aR[fo]
+    L = aL[fo]
     if (L > 1.0 or L < 0):
         continue
     at1, at2 = MatSelec(R, yieldstrength)
@@ -67,7 +71,8 @@ for R in np.arange(0.01, maxR, 1e-3):
         # including the attachents
         diff_col, diff_shell = bucklingCheck(i, L, R, t1, newMass) 
         if diff_col > 0 and diff_shell > 0:
-            print(f"Option passes with material = {material}, L = {L:.5f}, R = {R:.5f}, t1 = {t1:.5f}, t2 = {t2:.5f}, mass = {newMass:.5f}, mass_hingeless = {lowestMass:.5f}")
+            print(f"Results for {choices[fo]}")
+            print(f"Option passes with material = {material}, L = {L:.5f}, R = {R:.5f}, t1 = {t1:.6f}, t2 = {t2:.6f}, mass = {newMass:.5f}, mass_hingeless = {lowestMass:.5f}")
             
     else:
         #print(f"diff_col = {diff_col}, diff_shell = {diff_shell}")
