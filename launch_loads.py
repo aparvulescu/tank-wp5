@@ -13,7 +13,8 @@ nu = [0.342, 0.3, 0.33]  # for aluminium poisson's ratio
 
 def bucklingCheck(im, L, R, t1, m):
     p = 20e5
-    P = 4.3 * g * m
+    m_sc = 1477.5
+    P = 4.3 * g * (m + m_sc)
     E = youngsm[im]
     A = 2 * math.pi * R * t1
     I = math.pi * R*R*R * t1

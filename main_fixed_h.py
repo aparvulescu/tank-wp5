@@ -16,9 +16,10 @@ aR = [0.155, 0.175]
 aL = [0.59, 0.55]
 mProp = [38.5/2, 187.5/2]
 choices = ["fuel", "oxidizer"]
+m_sc = 1477.5
 fo = 2
 ok = 0
-n = 4  # number of attachemnts per tank
+n = 4  # number of attachments per tank
 
 #while fo != 0 and fo != 1:
 #    fo = int(input("Do you want to calculate dimensions for fuel (0) or oxizidizer (1)?: "))
