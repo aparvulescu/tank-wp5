@@ -11,6 +11,7 @@ materials = ['Ti-6Al-4V','Ti-3Al-2.5V','Al 2219-T851']
 yieldstrength = [880e6, 500e6, 352e6]
 density = [4430, 4480, 2840]
 youngsm = [113.8e9, 100e9, 73.1e9]
+mProp = [38.5/2, 187.5/2]
 V = [0.12/2, 0.15/2]
 fo = 2
 ok = 0

@@ -5,7 +5,7 @@ from mass_attachments import massAttachments
 import numpy as np
 import math
 
-print("Hello project WP5!")
+print("Hello project WP5!\n")
 
 materials = ['Ti-6Al-4V','Ti-3Al-2.5V','Al 2219-T851']
 yieldstrength = [880e6, 500e6, 352e6]
@@ -14,6 +14,7 @@ youngsm = [113.8e9, 100e9, 73.1e9]
 V = [0.12/2, 0.15/2]
 aR = [0.155, 0.175]
 aL = [0.59, 0.55]
+mProp = [38.5/2, 187.5/2]
 choices = ["fuel", "oxidizer"]
 fo = 2
 ok = 0
@@ -40,11 +41,12 @@ for fo in range(2):
         t1 = at1[i]
         t2 = at2[i]
         totMass = massTankAndProp(i, L, R, t1, t2, fo)
-        diff_col, diff_shell = bucklingCheck(i, L, R, t1, totMass)
+        diff_col, diff_shell, sigma_tank, sigma_cr1, sigma_cr2, Q, k, P = bucklingCheck(i, L, R, t1, totMass)
         while (diff_col < 0 or diff_shell < 0) and t1 < 0.5e-2:
             t1 += 1e-5
+            print("Thickness incrased!")
             totMass = massTankAndProp(i, L, R, t1, t2, fo)
-            diff_col, diff_shell = bucklingCheck(i, L, R, t1, totMass)
+            diff_col, diff_shell, sigma_tank, sigma_cr1, sigma_cr2, Q, k, P = bucklingCheck(i, L, R, t1, totMass)
         MLst.append(totMass)
         t1lst.append(t1)
         t2lst.append(t2)
@@ -69,11 +71,14 @@ for fo in range(2):
             newMass = oldMass - oldmatt + matt
         # to add buckling check
         # including the attachents
-        diff_col, diff_shell = bucklingCheck(i, L, R, t1, newMass) 
+        diff_col, diff_shell, sigma_tank, sigma_cr1, sigma_cr2, Q, k, P = bucklingCheck(i, L, R, t1, newMass) 
         if diff_col > 0 and diff_shell > 0:
-            print(f"Results for {choices[fo]}")
-            print(f"Option passes with material = {material}, L = {L:.5f}, R = {R:.5f}, t1 = {t1:.6f}, t2 = {t2:.6f}, mass = {newMass:.5f}, mass_hingeless = {lowestMass:.5f}")
-            
+            print(f"Results for {choices[fo]}\n")
+            print(f"Option passes with material = {material}, L = {L:.5f}, R = {R:.5f}, t1 = {t1:.6f}, t2 = {t2:.6f}")
+            print(f"mass = {newMass:.5f}, mass_att = {matt:.5f}, mass_prop = {mProp[fo]:.5f}, mass_tank = {newMass - matt - mProp[fo]:.5f}")
+            print(f"sigma_tank = {sigma_tank:.2f}, sigma_cr_col = {sigma_cr1:.2f}, sigma_cr_shell = {sigma_cr2:.2f}, diff_col = {diff_col:.2f}, diff_shell = {diff_shell:.2f}")
+            print(f"P = {P:.5f}, Q = {Q:.5f}, k = {k:.5f}\n\n")
+
     else:
         #print(f"diff_col = {diff_col}, diff_shell = {diff_shell}")
         continue

@@ -30,4 +30,4 @@ def bucklingCheck(im, L, R, t1, m):
     sigma_cr2 = (1.983 - 0.983 * math.exp(-23.14 * Q)) * k * ((math.pi**2 * E) / (12*(1 - nu[im]**2))) * (t1 / L)**2
     diff_shell = sigma_cr2 - sigma_tank
 
-    return (diff_col, diff_shell)
+    return (diff_col, diff_shell, sigma_tank, sigma_cr1, sigma_cr2, Q, k, P)
