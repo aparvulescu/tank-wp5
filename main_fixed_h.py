@@ -72,7 +72,7 @@ for fo in range(2):
             newMass = oldMass - oldmatt + matt
         # to add buckling check
         # including the attachents
-        diff_col, diff_shell, sigma_tank, sigma_cr1, sigma_cr2, Q, k, P = bucklingCheck(i, L, R, t1, newMass) 
+        diff_col, diff_shell, sigma_tank, sigma_cr1, sigma_cr2, Q, k, P = bucklingCheck(im, L, R, t1, newMass) 
         if diff_col > 0 and diff_shell > 0:
             print(f"Results for {choices[fo]}\n")
             print(f"Option passes with material = {material}, L = {L:.5f}, R = {R:.5f}, t1 = {t1:.6f}, t2 = {t2:.6f}")

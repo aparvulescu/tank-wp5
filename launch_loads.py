@@ -19,8 +19,11 @@ def bucklingCheck(im, L, R, t1, m):
     A = 2 * math.pi * R * t1
     I = math.pi * R*R*R * t1
     Q = (p/E) * (R/t1)**2
+    
     lamda = math.sqrt((12/(math.pi**4))*((L*L*L*L)/((R*R)*(t1*t1))*(1-nu[im]**2)))
     k = lamda + (12/math.pi**4) * (L*L*L*L/(R*R * t1*t1)) * (1 - nu[im]*nu[im]) * (1/lamda)  
+
+    #print(f"yes Q = {Q:.5f}, R = {R:.5f}, t1 = {t1:.6f}, E = {E}, p = {p}, lambda = {lamda}")
 
     # column buckling
     sigma_cr1 = (math.pi**2) * E * I / (A * L*L)
